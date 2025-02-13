@@ -19,7 +19,7 @@ const getBorders = async (code: string) => {
     `${BASE_URL_DATE_NAGER}/CountryInfo/${code}`
   );
 
-  return data.borders;
+  return data;
 };
 
 const getPopulation = async (iso3: string) => {
