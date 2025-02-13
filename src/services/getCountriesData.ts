@@ -1,7 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-import { IBorderCountry, IFlag, IPopulation } from "../types";
+import { IAvailableCountries, IFlag, IPopulation } from "../types";
 
 dotenv.config();
 
@@ -30,7 +30,21 @@ const getPopulation = async (iso3: string) => {
   return population[0].populationCounts;
 };
 
-const getFlagUrl = async (code: string) => {
+const getPopulationByName = async (name: string) => {
+  const { data } = await axios.get(`${BASE_URL_COUNTRIES_NOW}/population`);
+
+  const population = data.data.filter((pop: IPopulation) =>
+    pop.country.includes(name)
+  );
+
+  if (Object.keys(population).length > 0) {
+    return population[0].populationCounts;
+  }
+
+  return [];
+};
+
+const getFlagData = async (code: string) => {
   const { data } = await axios.get(`${BASE_URL_COUNTRIES_NOW}/flag/images`);
 
   const countryFlag = data.data.filter((flag: IFlag) => flag.iso2 === code);
@@ -38,4 +52,20 @@ const getFlagUrl = async (code: string) => {
   return countryFlag;
 };
 
-export { getAvailableCountries, getBorders, getPopulation, getFlagUrl };
+const getCountryNameFromList = async (code: string) => {
+  const countryList = await getAvailableCountries();
+  const country = countryList.filter((country: IAvailableCountries) => {
+    return country.countryCode === code;
+  });
+
+  return country[0].name;
+};
+
+export {
+  getAvailableCountries,
+  getBorders,
+  getPopulation,
+  getFlagData,
+  getCountryNameFromList,
+  getPopulationByName,
+};
