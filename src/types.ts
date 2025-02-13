@@ -18,6 +18,11 @@ export interface IPopulationCounts {
   value: string;
 }
 
+export interface IAvailableCountries {
+  countryCode: string;
+  name: string;
+}
+
 export interface IFlag {
   name: string;
   flag: string;
