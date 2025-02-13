@@ -19,11 +19,7 @@ const getBorders = async (code: string) => {
     `${BASE_URL_DATE_NAGER}/CountryInfo/${code}`
   );
 
-  const borderCountries = data.borders.map(
-    (borderCountry: IBorderCountry) => borderCountry.commonName
-  );
-
-  return borderCountries;
+  return data.borders;
 };
 
 const getPopulation = async (iso3: string) => {
