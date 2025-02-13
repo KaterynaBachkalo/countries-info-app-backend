@@ -25,8 +25,6 @@ Prerequisites
 
 2. Backend Setup
 
-   cd backend
-
    npm install # or yarn install
 
 ## Configure Environment Variables
