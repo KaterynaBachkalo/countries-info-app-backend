@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import catchAsync from "../utils/catchAsync";
+import catchAsync from '../utils/catchAsync';
 import {
   getBorders,
   getCountryNameFromList,
   getFlagData,
   getPopulation,
   getPopulationByName,
-} from "../services/getCountriesData";
+} from '../services/getCountriesData';
 
 const countryInfoController = catchAsync(
   async (req: Request, res: Response) => {
@@ -23,7 +23,7 @@ const countryInfoController = catchAsync(
       flagUrl = countryFlagData[0].flag;
       population = await getPopulation(countryFlagData[0].iso3);
     } else {
-      flagUrl = "";
+      flagUrl = '';
 
       let contryName = await getCountryNameFromList(code);
 
@@ -31,7 +31,7 @@ const countryInfoController = catchAsync(
     }
 
     res.status(200).json({ borders, flagUrl: flagUrl, population });
-  }
+  },
 );
 
 export default countryInfoController;

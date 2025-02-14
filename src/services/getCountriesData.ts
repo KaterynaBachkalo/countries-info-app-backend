@@ -1,7 +1,7 @@
-import axios from "axios";
-import dotenv from "dotenv";
+import axios from 'axios';
+import dotenv from 'dotenv';
 
-import { IAvailableCountries, IFlag, IPopulation } from "../types";
+import { IAvailableCountries, IFlag, IPopulation } from '../types';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const getAvailableCountries = async () => {
 
 const getBorders = async (code: string) => {
   const { data } = await axios.get(
-    `${BASE_URL_DATE_NAGER}/CountryInfo/${code}`
+    `${BASE_URL_DATE_NAGER}/CountryInfo/${code}`,
   );
 
   return data;
@@ -34,7 +34,7 @@ const getPopulationByName = async (name: string) => {
   const { data } = await axios.get(`${BASE_URL_COUNTRIES_NOW}/population`);
 
   const population = data.data.filter((pop: IPopulation) =>
-    pop.country.includes(name)
+    pop.country.includes(name),
   );
 
   if (Object.keys(population).length > 0) {
